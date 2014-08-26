@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +23,7 @@ public class SignUpActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_sign_up);
 
         mUsername = (EditText) findViewById(R.id.usernameField);
@@ -43,6 +43,7 @@ public class SignUpActivity extends Activity {
                 email = email.trim();
 
                 if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+                    //Checks if the user left a field blank and displays an alert message
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setTitle(getString(R.string.signup_error_title))
                             .setMessage(getString(R.string.signup_error_message))
@@ -51,6 +52,9 @@ public class SignUpActivity extends Activity {
                     dialog.show();
                 }
                 else {
+                    //new user is signed up on parse.com
+                    setProgressBarIndeterminateVisibility(true);
+
                     ParseUser newUser = new ParseUser();
                     newUser.setUsername(username);
                     newUser.setPassword(password);
@@ -58,13 +62,17 @@ public class SignUpActivity extends Activity {
                     newUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
+                            setProgressBarIndeterminateVisibility(false);
+
                             if (e == null) {
+                                //If sign up is a success, user is taken to the inbox
                                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
                             else {
+                                //if sign up fails, error message is displayed
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                                 builder.setTitle(R.string.signup_error_title)
                                         .setMessage(e.getMessage())
@@ -80,10 +88,10 @@ public class SignUpActivity extends Activity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.sign_up, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.sign_up, menu);
+//        return true;
+//    }
 }
