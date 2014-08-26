@@ -1,11 +1,9 @@
 package com.richluick.ribbit;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.support.v13.app.FragmentPagerAdapter;
-
-import com.richluick.ribbit.R;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
 
@@ -26,13 +24,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+
+        switch (position) {
+            case 0:
+                return new InboxFragment();
+            case 1:
+                return new FriendsFragment();
+        }
+
+        return null;
     }
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
-        return 3;
+        return 2;
     }
 
     @Override
@@ -43,8 +48,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return mContext.getString(R.string.title_section1).toUpperCase(l);
             case 1:
                 return mContext.getString(R.string.title_section2).toUpperCase(l);
-            case 2:
-                return mContext.getString(R.string.title_section3).toUpperCase(l);
         }
         return null;
     }
