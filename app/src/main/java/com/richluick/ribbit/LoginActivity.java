@@ -25,6 +25,7 @@ public class LoginActivity extends Activity {
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_login);
 
        mSignUpTextView = (TextView) findViewById(R.id.signUpText);
@@ -50,6 +51,7 @@ public class LoginActivity extends Activity {
                password = password.trim();
 
                if (username.isEmpty() || password.isEmpty()) {
+                   //alert user if username or password are empty
                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                    builder.setTitle(getString(R.string.login_error_title))
                            .setMessage(getString(R.string.login_error_message))
@@ -58,16 +60,22 @@ public class LoginActivity extends Activity {
                    dialog.show();
                }
                else {
+                   //Login
+                   setProgressBarIndeterminateVisibility(true);
+
                    ParseUser.logInInBackground(username, password, new LogInCallback() {
                        @Override
                        public void done(ParseUser parseUser, ParseException e) {
+                           setProgressBarIndeterminateVisibility(false);
                            if (e == null) {
+                               //Login is a success, send user to inbox activity
                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                startActivity(intent);
                            }
                            else {
+                               //error logging in, error message is displayed
                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                builder.setTitle(R.string.login_error_title)
                                        .setMessage(e.getMessage())
