@@ -36,58 +36,76 @@ public class ForgotPasswordActivity extends Activity {
                 String email = mEmail.getText().toString();
                 email = email.trim();
 
-                if (email.isEmpty()) {
-                    //Checks if the user left a field blank and displays an alert message
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPasswordActivity.this);
-                    builder.setTitle(getString(R.string.signup_error_title))
-                            .setMessage(getString(R.string.forgot_password_error_message))
-                            .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                isEmailValid(email); //checks if the email is valid/not empty
+            }
+        });
+    }
+
+    private void isEmailValid(String email) {
+        if (email.isEmpty()) {
+            emptyEmailFieldMessage(); //Checks if the user left a field blank and displays an alert message
+        }
+        else {
+            //If email is valid, parse.com begins resetting email process
+            setProgressBarIndeterminateVisibility(true);
+            resetPassword(email); //if email field isn't empty, it gets reset
+        }
+    }
+
+    //This method resets the password or displays and error if there is an exception
+    private void resetPassword(String email) {
+        ParseUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    setProgressBarIndeterminateVisibility(false);
+                    validEmailMessage(); //valid email is entered. reset email is sent and success message displayed
                 }
                 else {
-                    //If email is valid, parse.com begins resetting email process
-                    setProgressBarIndeterminateVisibility(true);
-
-                    ParseUser.requestPasswordResetInBackground(email,new RequestPasswordResetCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if(e == null) {
-                                setProgressBarIndeterminateVisibility(false);
-
-                                //valid email was typed. Email was successfully sent to user for password reset
-                                AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPasswordActivity.this);
-                                builder.setTitle(getString(R.string.forgot_password_success_title))
-                                        .setMessage(getString(R.string.forgot_password_success_message))
-                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                //Now send the user back to the Login Screen
-                                                Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(intent);
-                                            }
-                                        });
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            }
-                            else {
-                                setProgressBarIndeterminateVisibility(false);
-
-                                //error with email(invalid email), error message is displayed
-                                AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPasswordActivity.this);
-                                builder.setTitle(R.string.login_error_title)
-                                        .setMessage(e.getMessage())
-                                        .setPositiveButton(android.R.string.ok, null);
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            }
-                        }
-                    });
+                    setProgressBarIndeterminateVisibility(false);
+                    emailExceptionMethod(e); //exception thrown, error message is displayed
                 }
             }
         });
+    }
+
+    //This displays a message if an exception is thrown when the user clicks the reset email button(i.e. invalid email)
+    private void emailExceptionMethod(ParseException e) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.login_error_title)
+                .setMessage(e.getMessage())
+                .setPositiveButton(android.R.string.ok, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    //valid email was typed. Email was successfully sent to user for password reset.
+    private void validEmailMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.forgot_password_success_title))
+                .setMessage(getString(R.string.forgot_password_success_message))
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Now send the user back to the Login Screen
+                        Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    //Error message if the email field is empty and the user clicks the reset button
+    private void emptyEmailFieldMessage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.signup_error_title))
+                .setMessage(getString(R.string.forgot_password_error_message))
+                .setPositiveButton(android.R.string.ok, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
