@@ -2,9 +2,8 @@
 <resources>
 
     <string name="app_name">Ribbit</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Inbox</string>
+    <string name="title_section2">Friends</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -22,6 +21,8 @@
     <string name="menu_logout_label">Logout</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     <string name="forgot_password_error_message">Please make sure you enter a valid email.</string>
+    <string name="empty_inbox">No new messages!</string>
+    <string name="empty_friends_label">Add friends to begin!</string>
     <string name="forgot_password_success_title">Success!</string>
     <string name="forgot_password_success_message">An email was successfully sent to the address entered. Please follow the instructions in the email to reset your password.</string>
 
