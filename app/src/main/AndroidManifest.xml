@@ -38,6 +38,15 @@
             android:parentActivityName=".SignUpActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".EditFriendsActivity"
+            android:label="@string/title_activity_edit_friends"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.richluick.ribbit.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
