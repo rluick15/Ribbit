@@ -102,15 +102,20 @@ public class EditFriendsActivity extends ListActivity {
 
         if (getListView().isItemChecked(position)) {
             mFriendsRelation.add(mUsers.get(position));
-            mCurrentUser.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e != null) {
-                        Log.e(TAG, e.getMessage());
-                    }
-                }
-            });
+
         }
+        else {
+            mFriendsRelation.remove(mUsers.get(position));
+        }
+
+        mCurrentUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
     }
 
     private void addFriendCheckmarks() {
