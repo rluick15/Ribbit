@@ -18,10 +18,10 @@ public class SignUpActivity extends Activity {
     protected EditText mUsername;
     protected EditText mPassword;
     protected EditText mEmail;
-    protected EditText mFirstName;
-    protected EditText mLastName;
-    protected EditText mHometown;
-    protected EditText mWebsite;
+//    protected EditText mFirstName;
+//    protected EditText mLastName;
+//    protected EditText mHometown;
+//    protected EditText mWebsite;
     protected Button mSignUpButton;
 
     @Override
@@ -33,10 +33,10 @@ public class SignUpActivity extends Activity {
         mUsername = (EditText) findViewById(R.id.usernameField);
         mPassword = (EditText) findViewById(R.id.passwordField);
         mEmail = (EditText) findViewById(R.id.emailField);
-        mFirstName = (EditText) findViewById(R.id.firstNameField);
-        mLastName = (EditText) findViewById(R.id.lastNameField);
-        mHometown = (EditText) findViewById(R.id.hometownField);
-        mWebsite = (EditText) findViewById(R.id.websiteField);
+//        mFirstName = (EditText) findViewById(R.id.firstNameField);
+//        mLastName = (EditText) findViewById(R.id.lastNameField);
+//        mHometown = (EditText) findViewById(R.id.hometownField);
+//        mWebsite = (EditText) findViewById(R.id.websiteField);
         mSignUpButton = (Button) findViewById(R.id.signupButton);
 
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
@@ -45,20 +45,20 @@ public class SignUpActivity extends Activity {
                 String username = mUsername.getText().toString();
                 String password = mPassword.getText().toString();
                 String email = mEmail.getText().toString();
-                String firstName = mFirstName.getText().toString();
-                String lastName = mLastName.getText().toString();
-                String hometown = mHometown.getText().toString();
-                String website = mWebsite.getText().toString();
+//                String firstName = mFirstName.getText().toString();
+//                String lastName = mLastName.getText().toString();
+//                String hometown = mHometown.getText().toString();
+//                String website = mWebsite.getText().toString();
 
                 username = username.trim();
                 password = password.trim();
                 email = email.trim();
-                firstName = firstName.trim();
-                lastName = lastName.trim();
-                hometown = hometown.trim();
-                website = website.trim();
+//                firstName = firstName.trim();
+//                lastName = lastName.trim();
+//                hometown = hometown.trim();
+//                website = website.trim();
 
-                if (username.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+                if (username.isEmpty() || password.isEmpty() || email.isEmpty() /*|| firstName.isEmpty() || lastName.isEmpty()*/) {
                     //Checks if the user left a field blank and displays an alert message
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setTitle(getString(R.string.signup_error_title))
@@ -74,11 +74,11 @@ public class SignUpActivity extends Activity {
                     ParseUser newUser = new ParseUser();
                     newUser.setUsername(username);
                     newUser.setPassword(password);
-                    newUser.setEmail(email);
-                    newUser.put(ParseConstants.KEY_FIRST_NAME, firstName);
-                    newUser.put(ParseConstants.KEY_LAST_NAME, lastName);
-                    newUser.put(ParseConstants.KEY_HOMETOWN, hometown);
-                    newUser.put(ParseConstants.KEY_WEBSITE, website);
+//                    newUser.setEmail(email);
+//                    newUser.put(ParseConstants.KEY_FIRST_NAME, firstName);
+//                    newUser.put(ParseConstants.KEY_LAST_NAME, lastName);
+//                    newUser.put(ParseConstants.KEY_HOMETOWN, hometown);
+//                    newUser.put(ParseConstants.KEY_WEBSITE, website);
 
                     newUser.signUpInBackground(new SignUpCallback() {
                         @Override
