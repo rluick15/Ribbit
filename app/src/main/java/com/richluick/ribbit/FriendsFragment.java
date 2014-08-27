@@ -40,7 +40,7 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
         getActivity().setProgressBarIndeterminateVisibility(true);
 
         ParseQuery<ParseUser> query =  mFriendsRelation.getQuery();
-        query.addAscendingOrder(ParseConstants.KEY_UNSERNAME);
+        query.addAscendingOrder(ParseConstants.KEY_USERNAME);
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
