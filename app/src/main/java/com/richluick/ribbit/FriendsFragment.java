@@ -1,15 +1,18 @@
 package com.richluick.ribbit;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
@@ -72,4 +75,18 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
             }
         });
     }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        ParseObject item = (ParseObject) l.getAdapter().getItem(position);
+        String objectID = item.getObjectId();
+
+        Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
+        intent.putExtra("ID", objectID);
+        startActivity(intent);
+    }
+
+
 }

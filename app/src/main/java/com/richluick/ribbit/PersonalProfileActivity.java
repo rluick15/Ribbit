@@ -53,6 +53,7 @@ public class PersonalProfileActivity extends Activity {
         mWebsiteField.setText("Website: " + mWebsite);
         Linkify.addLinks(mWebsiteField, Linkify.ALL);
 
+
     }
 
 
