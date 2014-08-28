@@ -111,6 +111,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             Intent intent = new Intent(this, EditFriendsActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.action_profile) {
+            Intent intent = new Intent(this, PersonalProfileActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
