@@ -49,8 +49,9 @@
         </activity>
         <activity
             android:name=".PersonalProfileActivity"
-            android:label="@string/title_activity_personal_profile"
-            android:parentActivityName=".MainActivity" >
+            android:label="@string/menu_profile_label"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.richluick.ribbit.MainActivity" />

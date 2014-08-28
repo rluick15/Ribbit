@@ -53,10 +53,10 @@ public class SignUpActivity extends Activity {
                 username = username.trim();
                 password = password.trim();
                 email = email.trim();
-//                firstName = firstName.trim();
-//                lastName = lastName.trim();
-//                hometown = hometown.trim();
-//                website = website.trim();
+                firstName = firstName.trim();
+                lastName = lastName.trim();
+                hometown = hometown.trim();
+                website = website.trim();
 
                 if (username.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
                     //Checks if the user left a field blank and displays an alert message
