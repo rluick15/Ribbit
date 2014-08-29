@@ -19,8 +19,6 @@ public class FriendsProfileActivity extends Activity {
 
         mSampleText = (TextView) findViewById(R.id.textView);
 
-//        Bundle extras = getIntent().getExtras();
-//        String data = extras.getString("ID");
         String id = getIntent().getStringExtra("ID");
 
 

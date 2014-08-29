@@ -16,6 +16,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -77,16 +78,28 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+  public void onListItemClick(ListView l, View v, int position, long id) {
+     super.onListItemClick(l, v, position, id);
 
-        ParseObject item = (ParseObject) l.getAdapter().getItem(position);
-        String objectID = item.getObjectId();
+        final ParseObject item = (ParseObject) l.getAdapter().getItem(position);
+        item.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null) {
+                    String objectID = item.getObjectId();
+                    Log.e(TAG, objectID);
 
-        Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
-        intent.putExtra("ID", objectID);
-        startActivity(intent);
-    }
+                    Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
+                    intent.putExtra("ID", objectID);
+                    startActivity(intent);
+                }
+                else {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
+
+}
 
 
 }
