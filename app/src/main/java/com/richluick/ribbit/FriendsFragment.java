@@ -85,7 +85,7 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
         String itemID = mObjectIds.get(position);
 
         Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
-        intent.putExtra("ID", itemID);
+        intent.putExtra(ParseConstants.KEY_ID, itemID);
         startActivity(intent);
 
 
