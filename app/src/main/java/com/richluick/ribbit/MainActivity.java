@@ -137,6 +137,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 dialog.show();
         }
 
+            Intent intent = new Intent(this, PersonalProfileActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

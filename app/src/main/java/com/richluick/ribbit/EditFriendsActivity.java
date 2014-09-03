@@ -47,7 +47,7 @@ public class EditFriendsActivity extends ListActivity {
         setProgressBarIndeterminateVisibility(true);
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.orderByAscending(ParseConstants.KEY_UNSERNAME);
+        query.orderByAscending(ParseConstants.KEY_USERNAME);
         query.setLimit(1000);
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
