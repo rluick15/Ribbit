@@ -12,12 +12,11 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FriendsFragment extends android.support.v4.app.ListFragment {
@@ -27,6 +26,7 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
+    protected ArrayList<String> mObjectIds = new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
 
         getActivity().setProgressBarIndeterminateVisibility(true);
 
-        ParseQuery<ParseUser> query =  mFriendsRelation.getQuery();
+        ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
         query.addAscendingOrder(ParseConstants.KEY_USERNAME);
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
@@ -54,17 +54,18 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
                     mFriends = friends;
 
                     String[] usernames = new String[mFriends.size()];
+
                     int i = 0;
                     for (ParseUser user : mFriends) {
                         usernames[i] = user.getUsername();
+                        mObjectIds.add(user.getObjectId());
                         i++;
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getListView().getContext(),
                             android.R.layout.simple_list_item_1,
                             usernames);
                     setListAdapter(adapter);
-                }
-                else {
+                } else {
                     Log.e(TAG, e.getMessage());
                     AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
                     builder.setTitle(R.string.error_title)
@@ -78,28 +79,16 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
     }
 
     @Override
-  public void onListItemClick(ListView l, View v, int position, long id) {
-     super.onListItemClick(l, v, position, id);
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
 
-        final ParseObject item = (ParseObject) l.getAdapter().getItem(position);
-        item.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e == null) {
-                    String objectID = item.getObjectId();
-                    Log.e(TAG, objectID);
+        String itemID = mObjectIds.get(position);
 
-                    Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
-                    intent.putExtra("ID", objectID);
-                    startActivity(intent);
-                }
-                else {
-                    Log.e(TAG, e.getMessage());
-                }
-            }
-        });
-
-}
+        Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
+        intent.putExtra(ParseConstants.KEY_ID, itemID);
+        startActivity(intent);
 
 
+
+    }
 }
