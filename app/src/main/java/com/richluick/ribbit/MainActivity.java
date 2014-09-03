@@ -123,21 +123,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch(id) {
-            case R.id.action_logout:
-                ParseUser.logOut();
-                navigateToLogin();
-            case R.id.action_edit_friends:
-                Intent intent = new Intent(this, EditFriendsActivity.class);
-                startActivity(intent);
-            case R.id.action_profile:
-                intent = new Intent(this, PersonalProfileActivity.class);
-                startActivity(intent);
-            case R.id.action_camera:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setItems(R.array.camera_choices, mDialogListener);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+        if (id == R.id.action_logout) {
+            ParseUser.logOut();
+            navigateToLogin();
+        }
+        else if (id ==  R.id.action_edit_friends) {
+            Intent intent = new Intent(this, EditFriendsActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_profile) {
+            Intent intent = new Intent(this, PersonalProfileActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_camera) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setItems(R.array.camera_choices, mDialogListener);
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
         return super.onOptionsItemSelected(item);
