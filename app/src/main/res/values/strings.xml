@@ -31,6 +31,8 @@
     <string name="title_activity_friends_profile">Friend Profile</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_camera_label">Camera</string>
+    <string name="error_external_storage">There was a problem accessing your devices external storage.</string>
+    <string name="failed_to_create_dir_log_message">Failed to create directory</string>
     <string-array name="camera_choices">
         <item>Take Picture</item>
         <item>Take Video</item>
