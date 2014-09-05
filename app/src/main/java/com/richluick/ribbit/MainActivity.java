@@ -169,10 +169,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
     };
 
-
-
-
-
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -238,6 +234,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                             .setTabListener(this));
         }
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
