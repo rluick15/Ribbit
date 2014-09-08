@@ -51,8 +51,14 @@ public class InboxFragment extends android.support.v4.app.ListFragment {
                         i++;
                     }
 
-                    MessageAdapter adapter = new MessageAdapter(getListView().getContext(), mMessages);
-                    setListAdapter(adapter);
+                    if(getListView().getAdapter() == null) {
+                        MessageAdapter adapter = new MessageAdapter(getListView().getContext(), mMessages);
+                        setListAdapter(adapter);
+                    }
+                    else {
+                        //refill the adapter
+                        ((MessageAdapter) getListView().getAdapter()).refill(mMessages);
+                    }
                 }
             }
         });

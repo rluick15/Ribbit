@@ -76,4 +76,10 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         TextView dateLabel;
     }
 
+    public void refill(List<ParseObject> messages) {
+        mMessages.clear();
+        mMessages.addAll(messages);
+        notifyDataSetChanged();
+    }
+
 }
