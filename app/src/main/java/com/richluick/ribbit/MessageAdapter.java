@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.parse.ParseObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
 
     protected Context mContext;
     protected List<ParseObject> mMessages;
+    protected String mMilliString;
 
     public MessageAdapter(Context context, List<ParseObject> messages) {
         super(context, R.layout.message_item, messages);
@@ -36,6 +40,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
             holder = new ViewHolder();
             holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
             holder.nameLabel = (TextView) convertView.findViewById(R.id.senderLabel);
+            holder.dateLabel = (TextView) convertView.findViewById(R.id.dateLabel);
             convertView.setTag(holder);
         }
         else {
@@ -51,14 +56,24 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
             holder.iconImageView.setImageResource(R.drawable.ic_action_play_over_video);
         }
 
+        String date = formatDate(message);
+
         holder.nameLabel.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
+        holder.dateLabel.setText(date);
 
         return convertView;
+    }
+
+    private String formatDate(ParseObject message) {
+        Date messageDate = message.getCreatedAt();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        return df.format(messageDate);
     }
 
     private static class ViewHolder {
         ImageView iconImageView;
         TextView nameLabel;
+        TextView dateLabel;
     }
 
 }
