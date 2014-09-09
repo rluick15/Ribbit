@@ -1,5 +1,6 @@
 package com.richluick.ribbit;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -24,9 +25,13 @@ public class LoginActivity extends Activity {
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
-        setContentView(R.layout.activity_login);
+       super.onCreate(savedInstanceState);
+       requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
+       setContentView(R.layout.activity_login);
+
+       //Hide the action bar
+       ActionBar actionBar = getActionBar();
+       actionBar.hide();
 
        mSignUpTextView = (TextView) findViewById(R.id.signUpText);
        mSignUpTextView.setOnClickListener(new View.OnClickListener() {
