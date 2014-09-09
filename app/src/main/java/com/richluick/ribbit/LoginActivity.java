@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.LogInCallback;
@@ -19,6 +20,7 @@ public class LoginActivity extends Activity {
     protected EditText mUsername;
     protected EditText mPassword;
     protected Button mLoginButton;
+    protected ProgressBar mProgressBar;
 
     protected TextView mSignUpTextView;
     protected TextView mForgotPasswordTextView;
@@ -26,8 +28,10 @@ public class LoginActivity extends Activity {
    @Override
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
-       requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
        setContentView(R.layout.activity_login);
+
+       mProgressBar = (ProgressBar) findViewById(R.id.progressBar); //Get progress bar
+       mProgressBar.setVisibility(View.INVISIBLE);
 
        //Hide the action bar
        ActionBar actionBar = getActionBar();
@@ -37,6 +41,7 @@ public class LoginActivity extends Activity {
        mSignUpTextView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               mProgressBar.setVisibility(View.VISIBLE);
                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                startActivity(intent);
            }
@@ -46,6 +51,7 @@ public class LoginActivity extends Activity {
        mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               mProgressBar.setVisibility(View.VISIBLE);
                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                startActivity(intent);
            }
@@ -58,6 +64,8 @@ public class LoginActivity extends Activity {
        mLoginButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               mProgressBar.setVisibility(View.VISIBLE);
+
                String username = mUsername.getText().toString();
                String password = mPassword.getText().toString();
 
@@ -65,6 +73,8 @@ public class LoginActivity extends Activity {
                password = password.trim();
 
                if (username.isEmpty() || password.isEmpty()) {
+                   mProgressBar.setVisibility(View.INVISIBLE);
+
                    //alert user if username or password are empty
                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                    builder.setTitle(getString(R.string.login_error_title))
@@ -73,14 +83,10 @@ public class LoginActivity extends Activity {
                    AlertDialog dialog = builder.create();
                    dialog.show();
                }
-               else {
-                   //Login
-                   setProgressBarIndeterminateVisibility(true);
-
+               else { //Login
                    ParseUser.logInInBackground(username, password, new LogInCallback() {
                        @Override
                        public void done(ParseUser parseUser, ParseException e) {
-                           setProgressBarIndeterminateVisibility(false);
                            if (e == null) {
                                //Login is a success, send user to inbox activity
                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -103,5 +109,6 @@ public class LoginActivity extends Activity {
            }
        });
     }
+
 
 }
