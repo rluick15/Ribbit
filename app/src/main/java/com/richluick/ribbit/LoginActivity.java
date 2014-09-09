@@ -41,7 +41,6 @@ public class LoginActivity extends Activity {
        mSignUpTextView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               mProgressBar.setVisibility(View.VISIBLE);
                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                startActivity(intent);
            }
@@ -51,7 +50,6 @@ public class LoginActivity extends Activity {
        mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               mProgressBar.setVisibility(View.VISIBLE);
                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                startActivity(intent);
            }
@@ -87,6 +85,8 @@ public class LoginActivity extends Activity {
                    ParseUser.logInInBackground(username, password, new LogInCallback() {
                        @Override
                        public void done(ParseUser parseUser, ParseException e) {
+                           mProgressBar.setVisibility(View.INVISIBLE);
+
                            if (e == null) {
                                //Login is a success, send user to inbox activity
                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
