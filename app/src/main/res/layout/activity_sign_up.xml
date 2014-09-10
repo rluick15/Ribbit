@@ -24,63 +24,73 @@
 
         <EditText
             android:id="@+id/usernameField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username_hint" />
+            android:hint="@string/username_hint"
+            style="@style/AuthEditText">
+
+        <requestFocus />
+    </EditText>
 
         <EditText
             android:id="@+id/passwordField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/password_hint"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            style="@style/AuthEditText"/>
 
         <EditText
             android:id="@+id/emailField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/email_hint"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            style="@style/AuthEditText"/>
 
         <EditText
             android:id="@+id/firstNameField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/first_name_hint"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            style="@style/AuthEditText"/>
 
         <EditText
             android:id="@+id/lastNameField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/last_name_hint"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            style="@style/AuthEditText"/>
 
         <EditText
             android:id="@+id/hometownField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hometown_hint" />
+            android:hint="@string/hometown_hint"
+            style="@style/AuthEditText"/>
 
         <EditText
             android:id="@+id/websiteField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/website_hint" />
+            android:hint="@string/website_hint"
+            style="@style/AuthEditText"/>
 
     </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/buttonDivider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextLayout"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/button_divider"
+        android:contentDescription="@string/content_desc_button_divider"/>
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:text="@string/sign_up_button_label"
         android:layout_below="@+id/editTextLayout"
-        android:text="@string/sign_up_button_label" />
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/buttonDivider"
+        android:layout_marginRight="0dp"
+        style="@style/AuthButton"/>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:text="@string/cancel_button_label"
+        android:layout_below="@+id/editTextLayout"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/buttonDivider"
+        android:layout_marginLeft="0dp"
+        style="@style/AuthButton"/>
 
 </RelativeLayout>

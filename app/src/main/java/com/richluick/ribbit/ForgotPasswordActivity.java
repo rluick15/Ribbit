@@ -1,5 +1,6 @@
 package com.richluick.ribbit;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,12 +20,26 @@ public class ForgotPasswordActivity extends Activity {
 
     protected EditText mEmail;
     protected Button mResetButton;
+    protected Button mCancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_forgot_password);
+
+        //Hide the action bar
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
+        //Returns to Login Screen
+        mCancelButton = (Button) findViewById(R.id.cancelButton);
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         mEmail = (EditText) findViewById(R.id.emailField);
         mResetButton = (Button) findViewById(R.id.resetButton);

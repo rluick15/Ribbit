@@ -24,6 +24,7 @@ public class SignUpActivity extends Activity {
     protected EditText mHometown;
     protected EditText mWebsite;
     protected Button mSignUpButton;
+    protected Button mCancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,18 @@ public class SignUpActivity extends Activity {
         mLastName = (EditText) findViewById(R.id.lastNameField);
         mHometown = (EditText) findViewById(R.id.hometownField);
         mWebsite = (EditText) findViewById(R.id.websiteField);
-        mSignUpButton = (Button) findViewById(R.id.signupButton);
 
+        //Returns to Login Screen
+        mCancelButton = (Button) findViewById(R.id.cancelButton);
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        //Signs up User with given info
+        mSignUpButton = (Button) findViewById(R.id.signupButton);
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
