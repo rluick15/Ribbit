@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -25,12 +26,16 @@ public class SignUpActivity extends Activity {
     protected EditText mWebsite;
     protected Button mSignUpButton;
     protected Button mCancelButton;
+    protected ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_sign_up);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar); //Get progress bar
+        mProgressBar.setVisibility(View.INVISIBLE);
 
         //Hide the action bar
         ActionBar actionBar = getActionBar();
@@ -58,6 +63,8 @@ public class SignUpActivity extends Activity {
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mProgressBar.setVisibility(View.VISIBLE);
+
                 String username = mUsername.getText().toString();
                 String password = mPassword.getText().toString();
                 String email = mEmail.getText().toString();
@@ -75,6 +82,8 @@ public class SignUpActivity extends Activity {
                 website = website.trim();
 
                 if (username.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+                    mProgressBar.setVisibility(View.INVISIBLE);
+
                     //Checks if the user left a field blank and displays an alert message
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setTitle(getString(R.string.signup_error_title))
@@ -84,6 +93,8 @@ public class SignUpActivity extends Activity {
                     dialog.show();
                 }
                 else {
+                    mProgressBar.setVisibility(View.INVISIBLE);
+
                     //new user is signed up on parse.com
                     setProgressBarIndeterminateVisibility(true);
 

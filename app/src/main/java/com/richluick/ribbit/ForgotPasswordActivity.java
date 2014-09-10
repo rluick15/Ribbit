@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -21,12 +22,16 @@ public class ForgotPasswordActivity extends Activity {
     protected EditText mEmail;
     protected Button mResetButton;
     protected Button mCancelButton;
+    protected ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_forgot_password);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar); //Get progress bar
+        mProgressBar.setVisibility(View.INVISIBLE);
 
         //Hide the action bar
         ActionBar actionBar = getActionBar();
@@ -48,6 +53,8 @@ public class ForgotPasswordActivity extends Activity {
         mResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mProgressBar.setVisibility(View.VISIBLE);
+
                 String email = mEmail.getText().toString();
                 email = email.trim();
 
@@ -57,6 +64,8 @@ public class ForgotPasswordActivity extends Activity {
     }
 
     private void isEmailValid(String email) {
+        mProgressBar.setVisibility(View.INVISIBLE);
+
         if (email.isEmpty()) {
             emptyEmailFieldMessage(); //Checks if the user left a field blank and displays an alert message
         }
