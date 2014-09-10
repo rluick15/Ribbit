@@ -8,11 +8,16 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
+    <string name="website_hint">Website (Optional)</string>
+    <string name="hometown_hint">Hometown (Optional)</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="first_name_hint">First Name</string>
     <string name="login_button_label">SIGN IN</string>
     <string name="sign_up_text">Don\'t have an account? Sign Up!</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="email_hint">Email</string>
     <string name="sign_up_button_label">Sign Up</string>
+    <string name="reset_password_button_label">Reset Password</string>
     <string name="signup_error_title">Error</string>
     <string name="signup_error_message">Please make sure you enter a username, password, email address, and first and last name.</string>
     <string name="login_error_title">Error</string>
