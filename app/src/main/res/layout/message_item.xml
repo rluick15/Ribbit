@@ -26,29 +26,29 @@
             android:contentDescription="@string/content_desc_message_icon"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/senderLabel"
-            android:paddingTop="@dimen/message_vertical_padding"
-            android:paddingBottom="@dimen/message_vertical_padding"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/messageIcon"
-            android:layout_alignParentLeft="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Test Name"
             android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/messageIcon"
+            android:layout_alignParentLeft="true"
+            android:paddingTop="@dimen/message_vertical_padding"
             android:paddingLeft="@dimen/activity_horizontal_margin" />
 
         <TextView
+            android:id="@+id/timeLabel"
+            android:text="New Text"
+            android:textSize="12sp"
+            android:textColor="@color/light_gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/dateLabel"
-            android:layout_toEndOf="@+id/messageIcon"
-            android:layout_toRightOf="@+id/messageIcon"
-            android:textSize="10dp"
             android:layout_below="@+id/senderLabel"
-            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+            android:layout_toLeftOf="@+id/messageIcon"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/message_vertical_padding" />
 
 
     </RelativeLayout>
