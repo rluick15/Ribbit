@@ -1,11 +1,14 @@
 package com.richluick.ribbit.ui;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -21,7 +24,7 @@ import com.richluick.ribbit.utils.ParseConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendsFragment extends android.support.v4.app.Fragment {
+public class FriendsFragment extends Fragment {
 
     public static final String TAG = FriendsFragment.class.getSimpleName();
 
@@ -39,6 +42,7 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
 
         TextView emptyTextView = (TextView) rootView.findViewById(android.R.id.empty);
         mGridView.setEmptyView(emptyTextView);
+        mGridView.setOnItemClickListener(mOnItemClickListener);
 
         return rootView;
     }
@@ -92,14 +96,14 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
         });
     }
 
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//        super.onListItemClick(l, v, position, id);
-//
-//        String itemID = mObjectIds.get(position);
-//
-//        Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
-//        intent.putExtra(ParseConstants.KEY_ID, itemID);
-//        startActivity(intent);
-//    }
+    protected AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            String itemID = mObjectIds.get(position);
+
+            Intent intent = new Intent(getActivity(), FriendsProfileActivity.class);
+            intent.putExtra(ParseConstants.KEY_ID, itemID);
+            startActivity(intent);
+        }
+    };
 }
