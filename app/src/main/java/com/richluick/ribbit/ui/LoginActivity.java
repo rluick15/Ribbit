@@ -15,6 +15,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.richluick.ribbit.R;
+import com.richluick.ribbit.RibbitApplication;
 
 public class LoginActivity extends Activity {
 
@@ -90,6 +91,8 @@ public class LoginActivity extends Activity {
 
                            if (e == null) {
                                //Login is a success, send user to inbox activity
+                               RibbitApplication.updateParseInstallation(parseUser);
+
                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
